@@ -471,11 +471,11 @@ describe(`LinkedList Methods`, function () {
 
     describe(`LinkedList method --> Length()`, function () {
         const linkedlist = new SinglyList();
-        
+
         const testData = [{
-                element: [1, 2, 3],
-                expected: 1
-            },
+            element: [1, 2, 3],
+            expected: 1
+        },
             {
                 element: [1, 2, 3, 5],
                 expected: 2
@@ -496,11 +496,11 @@ describe(`LinkedList Methods`, function () {
 
     describe(`LinkedList method --> isArray(element)`, function () {
         const linkedlist = new SinglyList();
-        
+
         const testData = [{
-                element: [1, 2, 3],
-                expected: true
-            },
+            element: [1, 2, 3],
+            expected: true
+        },
             {
                 element: {name: 123, age: 455},
                 expected: false
@@ -521,7 +521,7 @@ describe(`LinkedList Methods`, function () {
             const {element, expected} = data;
             it(`should return boolean = ${expected} of element ${element} is Array in LinkedList`, function () {
                 linkedlist.push(element);
-                
+
                 const actual = linkedlist.isArray(linkedlist.searchNodeAt(x++));
 
                 assert.deepEqual(expected, actual);
@@ -531,11 +531,11 @@ describe(`LinkedList Methods`, function () {
 
     describe(`LinkedList method --> toString()`, function () {
         const linkedlist = new SinglyList();
-        
+
         const testData = [{
-                element: [1, 2, 3],
-                expected: '1,2,3'
-            },
+            element: [1, 2, 3],
+            expected: '1,2,3'
+        },
             {
                 element: {name: 123, age: 455},
                 expected: '1,2,3,[object Object]'
@@ -550,13 +550,13 @@ describe(`LinkedList Methods`, function () {
                 expected: '1,2,3,[object Object],[1,2,3,5],7777,'
             }
         ];
-       
+
 
         testData.forEach(function (data) {
             const {element, expected} = data;
             it(`should return string of element in LinkedList`, function () {
                 linkedlist.push(element);
-                
+
                 const actual = linkedlist.toString();
 
                 assert.deepEqual(expected, actual);
@@ -566,11 +566,11 @@ describe(`LinkedList Methods`, function () {
 
     describe(`LinkedList method --> toArray()`, function () {
         const linkedlist = new SinglyList();
-        
+
         const testData = [{
-                element: [1, 2, 3],
-                expected: [[1, 2, 3]]
-            },
+            element: [1, 2, 3],
+            expected: [[1, 2, 3]]
+        },
             {
                 element: {name: 123, age: 455},
                 expected: [[1, 2, 3], {name: 123, age: 455}]
@@ -585,13 +585,13 @@ describe(`LinkedList Methods`, function () {
                 expected: [[1, 2, 3], {name: 123, age: 455}, `[1,2,3,5]`, 7777, undefined]
             }
         ];
-       
+
 
         testData.forEach(function (data) {
             const {element, expected} = data;
             it(`should return Array of element in LinkedList`, function () {
                 linkedlist.push(element);
-                
+
                 const actual = linkedlist.toArray();
 
                 assert.deepEqual(expected, actual);
@@ -602,11 +602,11 @@ describe(`LinkedList Methods`, function () {
 
     describe(`LinkedList method --> printList()`, function () {
         const linkedlist = new SinglyList();
-        
+
         const testData = [{
-                element: [1, 2, 3],
-                expected: `1,2,3 / `
-            },
+            element: [1, 2, 3],
+            expected: `1,2,3 / `
+        },
             {
                 element: {name: 123, age: 455},
                 expected: `1,2,3 / [object Object] / `
@@ -621,13 +621,13 @@ describe(`LinkedList Methods`, function () {
                 expected: `1,2,3 / [object Object] / [1,2,3,5] / 7777 / undefined / `
             }
         ];
-       
+
 
         testData.forEach(function (data) {
             const {element, expected} = data;
             it(`should return liststring of element in LinkedList`, function () {
                 linkedlist.push(element);
-                
+
                 const actual = linkedlist.printList();
 
                 assert.deepEqual(expected, actual);
@@ -637,62 +637,62 @@ describe(`LinkedList Methods`, function () {
 
     describe(`LinkedList method --> some(callback)`, function () {
         const linkedlist = new SinglyList();
-            it(`should return true if one or more element LinkedList return true in callback`, function () {
-                linkedlist.push([1, 2, 3]);
-        linkedlist.push([5, 6, 7, 8]);
-        linkedlist.push({
-            name: `Alex`,
-            age: 30
+        it(`should return true if one or more element LinkedList return true in callback`, function () {
+            linkedlist.push([1, 2, 3]);
+            linkedlist.push([5, 6, 7, 8]);
+            linkedlist.push({
+                name: `Alex`,
+                age: 30
+            });
+            linkedlist.push(`hello`);
+            linkedlist.push(999999);
+            linkedlist.push(`bool`);
+            linkedlist.push(null);
+            linkedlist.push(undefined);
+            const actual = linkedlist.some(node => node.data == `hello`);
+            let flag = true;
+            assert.deepEqual(flag, actual);
         });
-        linkedlist.push(`hello`);
-        linkedlist.push(999999);
-        linkedlist.push(`bool`);
-        linkedlist.push(null);
-        linkedlist.push(undefined);
-                const actual = linkedlist.some(node => node.data == `hello`);
-                let flag = true;
-                assert.deepEqual(flag, actual);
-            });
-            it(`should return false if no one element LinkedList return true in callback`, function () {
-                linkedlist.remove(1);
-                const actual = linkedlist.some(node => node.data == `XXXXXXXXXX`);
-                let flag = false;
-                assert.deepEqual(flag, actual);
-            });
-       
+        it(`should return false if no one element LinkedList return true in callback`, function () {
+            linkedlist.remove(1);
+            const actual = linkedlist.some(node => node.data == `XXXXXXXXXX`);
+            let flag = false;
+            assert.deepEqual(flag, actual);
+        });
+
     });
 
     describe(`LinkedList method --> every(callback)`, function () {
         const linkedlist = new SinglyList();
-            it(`should return true if ALL element LinkedList return true in callback`, function () {
-                linkedlist.push([1, 2, 3]);
-        linkedlist.push([5, 6, 7, 8]);
-        linkedlist.push({
-            name: `Alex`,
-            age: 30
+        it(`should return true if ALL element LinkedList return true in callback`, function () {
+            linkedlist.push([1, 2, 3]);
+            linkedlist.push([5, 6, 7, 8]);
+            linkedlist.push({
+                name: `Alex`,
+                age: 30
+            });
+            linkedlist.push(`hello`);
+            linkedlist.push(999999);
+            linkedlist.push(`bool`);
+            linkedlist.push(null);
+            linkedlist.push(undefined);
+            const actual = linkedlist.every(node => node.data != null);
+            let flag = true;
+            assert.deepEqual(flag, actual);
         });
-        linkedlist.push(`hello`);
-        linkedlist.push(999999);
-        linkedlist.push(`bool`);
-        linkedlist.push(null);
-        linkedlist.push(undefined);
-                const actual = linkedlist.every(node => node.data != null);
-                let flag = true;
-                assert.deepEqual(flag, actual);
-            });
-            it(`should return false if one element LinkedList return false in callback`, function () {
-                linkedlist.remove(1);
-                const actual = linkedlist.every(node => node.data == `XXXXXXXXXX`);
-                let flag = false;
-                assert.deepEqual(flag, actual);
-            });
-       
+        it(`should return false if one element LinkedList return false in callback`, function () {
+            linkedlist.remove(1);
+            const actual = linkedlist.every(node => node.data == `XXXXXXXXXX`);
+            let flag = false;
+            assert.deepEqual(flag, actual);
+        });
+
     });
 
     describe(`LinkedList method --> isEmpty()`, function () {
         const linkedlist = new SinglyList();
         it(`should return True if LinkedList is Empty`, function () {
-            
+
             const actual = linkedlist.isEmpty();
             let flag = true;
             assert.deepEqual(flag, actual);
@@ -867,7 +867,7 @@ describe(`LinkedList Methods`, function () {
             expected: 2
         },];
 
-        
+
 
         testData.forEach(function (data) {
             const {
@@ -894,7 +894,7 @@ describe(`LinkedList Methods`, function () {
             it(`should return new LinkedList (length=${expected}) with remove element of index = (${index}) if deleteCount = (${deleteCount}), and add (${insertEl1}) and add (${insertEl2})`, function () {
                 const actual = linkedlist.splice(index, deleteCount, insertEl1, insertEl2);
                 assert.deepEqual(actual._length, expected);
-                
+
             });
         });
     });

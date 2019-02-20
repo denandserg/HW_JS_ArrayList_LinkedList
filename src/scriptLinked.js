@@ -18,25 +18,25 @@ class SinglyList {
         let current = this.head;
         let flag = 0;
 
-        // iterae over the list 
+        // iterae over the list
         while (current != null && flag !=1 ) {
-            // compare each element of the list 
-            // with given element 
+            // compare each element of the list
+            // with given element
             if (JSON.stringify(current.data) === JSON.stringify(element)) {
                 flag+=1;
                 return count;
             }
-               
+
             count++;
             current = current.next;
         }
 
-        // not found 
+        // not found
         return -1;
     }
 
     push(data) {
-      
+
 
         let node = new Node(data),
             currentNode = this.head;
@@ -65,7 +65,7 @@ class SinglyList {
     }
 
     pop() {
-        
+
         let lastNode = this.head;
         let beforeLastNode = this.head;
         let deleteNode;
@@ -114,14 +114,14 @@ class SinglyList {
         if (index > 0 && index > this._length)
             return false;
         else {
-            // creates a new node 
+            // creates a new node
             let node = new Node(element);
             let curr, prev;
 
             curr = this.head;
 
-            // add the element to the 
-            // first index 
+            // add the element to the
+            // first index
             if (index == 0) {
                 node.next = this.head;
                 this.head = node;
@@ -129,15 +129,15 @@ class SinglyList {
                 curr = this.head;
                 var it = 0;
 
-                // iterate over the list to find 
-                // the position to insert 
+                // iterate over the list to find
+                // the position to insert
                 while (it < index) {
                     it++;
                     prev = curr;
                     curr = curr.next;
                 }
 
-                // adding an element 
+                // adding an element
                 node.next = curr;
                 prev.next = node;
             }
@@ -154,12 +154,12 @@ class SinglyList {
                 failure: 'Failure: non-existent node in this list.'
             };
 
-        // 1-ый случай: неверная позиция 
+        // 1-ый случай: неверная позиция
         if (length === 0 || position < 1 || position > length) {
             throw new Error(message.failure);
         }
 
-        // 2-ой случай: верная позиция 
+        // 2-ой случай: верная позиция
         while (count < position) {
             currentNode = currentNode.next;
             count++;
@@ -221,11 +221,11 @@ class SinglyList {
         var current = this.head;
         var prev = null;
 
-        // iterate over the list 
+        // iterate over the list
         while (current != null) {
-            // comparing element with current 
-            // element if found then remove the 
-            // and return true 
+            // comparing element with current
+            // element if found then remove the
+            // and return true
             if (JSON.stringify(current.data) === JSON.stringify(element)) {
                 if (prev == null) {
                     this.head = current.next;
@@ -255,7 +255,7 @@ class SinglyList {
     }
 
     toString() {
-        
+
         let outStringArr = [];
         let currentNode = this.head;
         for (let i = 0; i < this._length; i++) {
@@ -357,91 +357,91 @@ class SinglyList {
 
     splice(){
         let removedElements= new SinglyList();
-            if(this.head === null){
-                
-                if(arguments.length<3) return removedElements;
-                this.head= new Node(arguments[2]);
-                let lastEl=this.head;
-                this._length=1;
-                for(let i=3; i<arguments.length; i++){
-                    lastEl.next=new Node(arguments[i]);
-                    lastEl=lastEl.next;
-                    this._length++;
-                }
-                return removedElements;
+        if(this.head === null){
+
+            if(arguments.length<3) return removedElements;
+            this.head= new Node(arguments[2]);
+            let lastEl=this.head;
+            this._length=1;
+            for(let i=3; i<arguments.length; i++){
+                lastEl.next=new Node(arguments[i]);
+                lastEl=lastEl.next;
+                this._length++;
             }
-            let elBeforeSeg = this.head;
-            let elAfterSeg;
-            let startIndex = arguments[0] >= 0 ? arguments[0] : this._length-arguments[0];
-            
-            let i = 0;
-            while (i < startIndex - 1){
-                elBeforeSeg = elBeforeSeg.next; 
+            return removedElements;
+        }
+        let elBeforeSeg = this.head;
+        let elAfterSeg;
+        let startIndex = arguments[0] >= 0 ? arguments[0] : this._length-arguments[0];
+
+        let i = 0;
+        while (i < startIndex - 1){
+            elBeforeSeg = elBeforeSeg.next;
+            i++;
+        }
+
+        if(arguments[0]==0) {
+            elAfterSeg = elBeforeSeg;
+        }
+
+        if(arguments[0]>0) {
+            elAfterSeg = elBeforeSeg.next;
+        }
+
+
+        if (startIndex === 0){
+            elBeforeSeg =null;
+        }
+
+        i = 0;
+        if(arguments[1]>0){
+            removedElements.head=elAfterSeg;
+            let lastEl=elAfterSeg;
+
+            while(i < arguments[1]){
+                if(elAfterSeg === null){
+                    elAfterSeg=new Node();
+                    lastEl=elAfterSeg;
+                    break;
+                };
+                lastEl=elAfterSeg;
+                removedElements._length++;
+                elAfterSeg=elAfterSeg.next;
+                this._length--;
                 i++;
             }
-            
-            if(arguments[0]==0) {
-                 elAfterSeg = elBeforeSeg;
-            } 
-            
-            if(arguments[0]>0) {
-                 elAfterSeg = elBeforeSeg.next;
-            }
-            
-            
-            if (startIndex === 0){
-                elBeforeSeg =null;
-            }
+            lastEl.next=null;
+        }
 
-            i = 0;
-            if(arguments[1]>0){
-                removedElements.head=elAfterSeg;
-                let lastEl=elAfterSeg;
-                                
-                while(i < arguments[1]){
-                    if(elAfterSeg === null){
-                        elAfterSeg=new Node();
-                        lastEl=elAfterSeg;
-                        break;
-                    };
-                    lastEl=elAfterSeg;
-                    removedElements._length++;
-                    elAfterSeg=elAfterSeg.next;
-                    this._length--;
-                    i++;
-                }
-                lastEl.next=null;
+        if(arguments.length < 3){
+            if(elBeforeSeg !== null){
+                elBeforeSeg.next = elAfterSeg;
+                return removedElements;
             }
-
-            if(arguments.length < 3){
-                if(elBeforeSeg !== null){
-                   elBeforeSeg.next = elAfterSeg; 
-                   return removedElements; 
-                }
-                else{//нету хэда
-                    this.head = elAfterSeg;
-                    return removedElements;
-                }
+            else{//нету хэда
+                this.head = elAfterSeg;
+                return removedElements;
             }
+        }
 
-            let firstElSeg = new Node(arguments[2]);
+        let firstElSeg = new Node(arguments[2]);
+        this._length++;
+        if(elBeforeSeg == null){
+            this.head = firstElSeg;
+        }
+        else{
+            elBeforeSeg.next = firstElSeg;
+        }
+
+        let lastElSeg = firstElSeg;
+
+        for (let i = 3; i < arguments.length; i++) {
+            lastElSeg.next = new Node(arguments[i]);
             this._length++;
-            if(elBeforeSeg == null){
-                this.head = firstElSeg;
-            }
-            else{
-                elBeforeSeg.next = firstElSeg;
-            }
-
-            let lastElSeg = firstElSeg;
-
-            for (let i = 3; i < arguments.length; i++) {
-                lastElSeg.next = new Node(arguments[i]);
-                this._length++;
-                lastElSeg = lastElSeg.next;
-            }
-            lastElSeg.next = elAfterSeg;
-            return removedElements;
+            lastElSeg = lastElSeg.next;
+        }
+        lastElSeg.next = elAfterSeg;
+        return removedElements;
     }
 }
 
